@@ -13,6 +13,8 @@ namespace FitnessCommunity.Helpers
         public ApplicationProfile()
         {
             CreateMap<WeightLog, WeightLogViewModel>();
+            CreateMap<WeightLogViewModel, WeightLog>();
+            CreateMap<WeightLog, TableWeightLogViewModel>();
         }
     }
 }

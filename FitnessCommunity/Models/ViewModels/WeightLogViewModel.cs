@@ -9,8 +9,9 @@ namespace FitnessCommunity.Models.ViewModels
     public class WeightLogViewModel
     {
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Date")]
+
         public DateTime LogDate { get; set; } = DateTime.Now;
 
         [Required]

@@ -114,7 +114,7 @@ namespace FitnessCommunity.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Index");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         [HttpGet]
@@ -141,7 +141,7 @@ namespace FitnessCommunity.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Index");
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
 

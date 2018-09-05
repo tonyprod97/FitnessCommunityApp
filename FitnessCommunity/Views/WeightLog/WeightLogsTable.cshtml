@@ -1,0 +1,48 @@
+﻿@model  IEnumerable<TableWeightLogViewModel>
+@{
+    ViewData["Title"] = "GetAllWeightLogs";
+    ViewBag.WeightLogs = Model;
+}
+
+<table class="table table-condensed table-hover" id="weightLogsTable">
+    <thead>
+        <tr>
+            <th>
+                Date:
+            </th>
+            <th>
+                Weight:
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @{
+        int i = 1;
+        foreach (var log in Model)
+        {
+            <tr>
+                <td>
+                   @i. @log.LogDate
+                </td>
+                <td>
+                    @log.WeightValue
+                    <a asp-action="DeleteWeightLog" asp-route-id="@log.Id">Delete</a>
+                    <a asp-action="EditWeightLog" asp-route-id="@log.Id">Edit</a>
+                </td>
+            </tr>
+            i++;
+        }
+    }
+    </tbody>
+</table>
+
+@section  Scripts 
+{
+    <script>
+        $(document).ready(function () {
+            var table = $('#weightLogsTable').DataTable();
+            console.log('log from script')
+        });
+    </script>
+}

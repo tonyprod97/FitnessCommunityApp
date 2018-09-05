@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FitnessCommunity.Data;
 using FitnessCommunity.Models;
+using FitnessCommunity.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +46,7 @@ namespace FitnessCommunity
 
             services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IWeigtLogManageService, WeigtLogManageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

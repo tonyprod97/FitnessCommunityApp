@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessCommunity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180904121929_AddedWeightLogsTable")]
-    partial class AddedWeightLogsTable
+    [Migration("20180905094041_ChangedConstraintsOnLogDate")]
+    partial class ChangedConstraintsOnLogDate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,21 +74,19 @@ namespace FitnessCommunity.Migrations
 
             modelBuilder.Entity("FitnessCommunity.Models.WeightLog", b =>
                 {
-                    b.Property<int>("WeightLogId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<string>("ApplicationUserId1");
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<DateTime>("LogDate");
 
                     b.Property<float>("WeightValue");
 
-                    b.HasKey("WeightLogId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("WeightLogs");
                 });
@@ -207,7 +205,7 @@ namespace FitnessCommunity.Migrations
                 {
                     b.HasOne("FitnessCommunity.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("WeightLogs")
-                        .HasForeignKey("ApplicationUserId1");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

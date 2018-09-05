@@ -5,12 +5,11 @@ namespace FitnessCommunity.Models
 {
     public class WeightLog
     {
-        public int WeightLogId { get; set; }
-        public int ApplicationUserId { get; set; }
+        public int Id { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime LogDate { get; set; }
 
         [Required]
