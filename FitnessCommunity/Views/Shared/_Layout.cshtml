@@ -52,7 +52,7 @@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/jquery/dist/datatables.js"></script> <!-- Add to not Develpoment environment-->
+        <script src="~/lib/jquery/dist/datatables.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
@@ -69,6 +69,8 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
+        <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"
+                asp-fallback-src="~/lib/jquery/dist/datatables.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

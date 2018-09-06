@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace FitnessCommunity.Models.ViewModels
 {
-    public class TableWeightLogViewModel
+    public class ChartViewModel
     {
         [DataType(DataType.Date)]
-        public DateTime LogDate { get; set; }
-        public float WeightValue { get; set; }
-        public int Id { get; set; }
+        [Display(Name ="Since")]
+        public DateTime StartingDate { get; set; }
+
+        public int NumberOfLogs { get; set; }
     }
 }

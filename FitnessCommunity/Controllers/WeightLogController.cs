@@ -17,15 +17,16 @@ namespace FitnessCommunity.Controllers
     [Route("[controller]")]
     public class WeightLogController : Controller
     {
-        private ApplicationDbContext _context;
-        private IMapper _mapper;
-        private IWeigtLogManageService _weigtLogManageService;
+        private readonly IMapper _mapper;
+        private readonly IWeigtLogManageService _weigtLogManageService;
+        private readonly IApplicationUserService _applicationUserService;
 
-        public WeightLogController(ApplicationDbContext context, IMapper mapper, IWeigtLogManageService weigtLogManageService)
+        public WeightLogController(ApplicationDbContext context, IMapper mapper, IWeigtLogManageService weigtLogManageService,
+                                    IApplicationUserService applicationUserService)
         {
-            _context = context;
             _mapper = mapper;
             _weigtLogManageService = weigtLogManageService;
+            _applicationUserService = applicationUserService;
         }
 
         [HttpGet("Create")]
@@ -40,13 +41,13 @@ namespace FitnessCommunity.Controllers
             if (ModelState.IsValid)
             {
                 WeightLog newWeightLog = _mapper.Map<WeightLog>(weightLogViewModel);
-                string userName = this.User.Identity.Name;
-                var user = _context.Users.First(u => u.Email == userName);
+
+                var user = await _applicationUserService.GetUserByEmail(this.User.Identity.Name);
 
                 newWeightLog.ApplicationUser = user;
-                _context.WeightLogs.Add(newWeightLog);
+                _weigtLogManageService.Add(newWeightLog);
                 
-                await _context.SaveChangesAsync();
+                await _weigtLogManageService.Save();
 
                 return RedirectToAction(nameof(HomeController.Index), "Home"); ;
             }
@@ -54,36 +55,36 @@ namespace FitnessCommunity.Controllers
             return View(weightLogViewModel);
         }
 
-
+        
         [HttpGet("Edit/{id}")]
-        public IActionResult EditWeightLog(int id)
+        public async Task<IActionResult> EditWeightLog(int id)
         {
-            WeightLog weightLog = _weigtLogManageService.FindWeightLog(id);
+            WeightLog weightLog = await _weigtLogManageService.FindWeightLogById(id);
             WeightLogViewModel weightLogViewModel = _mapper.Map<WeightLogViewModel>(weightLog);
 
             return View(weightLogViewModel);
         }
 
-        [HttpPut("Edit/{id}")]
-       /* public IActionResult EditWeightLog(int id)
+        [HttpPost("Edit/{id}")]
+        [ValidateAntiForgeryToken]
+       public async Task<IActionResult> EditWeightLog(TableWeightLogViewModel weightLogViewModel)
         {
-            WeightLog weightLog = _weigtLogManageService.FindWeightLog(id);
-            WeightLogViewModel weightLogViewModel = _mapper.Map<WeightLogViewModel>(weightLog);
+            await _weigtLogManageService.UpdateWeightLog(weightLogViewModel);
 
-            return View(weightLogViewModel);
-        }*/
-
+            return RedirectToAction(nameof(WeightLogController.GetAllWeightLogs),"WeightLog");
+        }
+        
         [HttpDelete("Delete/{id}")]
         [HttpGet("Delete/{id}")]
         public async Task<IActionResult> DeleteWeightLog(int id)
         {
-            WeightLog weightLog = _context.WeightLogs.First(wl => wl.Id == id);
+            WeightLog weightLog = await _weigtLogManageService.FindWeightLogById(id);
 
             if (weightLog!=null)
             {
-                _context.WeightLogs.Remove(weightLog);
-                await _context.SaveChangesAsync();
-                IEnumerable<TableWeightLogViewModel> newWeightLogs = _mapper.Map<IEnumerable<TableWeightLogViewModel>>(_weigtLogManageService.GetAllWeightLogs());
+                _weigtLogManageService.Remove(weightLog);
+                await _weigtLogManageService.Save();
+                IEnumerable<TableWeightLogViewModel> newWeightLogs = _mapper.Map<IEnumerable<TableWeightLogViewModel>>(await _applicationUserService.GetUserByEmail(this.User.Identity.Name));
           
                 return View("WeightLogsTable",newWeightLogs);
             }
@@ -99,15 +100,15 @@ namespace FitnessCommunity.Controllers
         {
 
             IEnumerable<TableWeightLogViewModel> tableWeightLogsViewModel =
-                _mapper.Map<IEnumerable<TableWeightLogViewModel>>(_weigtLogManageService.GetAllWeightLogs());
+                _mapper.Map<IEnumerable<TableWeightLogViewModel>>(await _weigtLogManageService.GetAllWeightLogs(await _applicationUserService.GetUserByEmail(this.User.Identity.Name)));
  
             return View("WeightLogsTable", tableWeightLogsViewModel);
         }
 
         [HttpGet("Get/{id}")]
-        public IActionResult GetWeightLog(int id)
+        public async Task<IActionResult> GetWeightLog(int id)
         {
-            WeightLog weightLog = _weigtLogManageService.FindWeightLog(id);
+            WeightLog weightLog =await _weigtLogManageService.FindWeightLogById(id);
 
             if (weightLog != null)
             {
@@ -119,7 +120,7 @@ namespace FitnessCommunity.Controllers
                 return NotFound("Log on given date was not found.");
             }
         }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

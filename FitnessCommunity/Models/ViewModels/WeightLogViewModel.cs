@@ -11,12 +11,12 @@ namespace FitnessCommunity.Models.ViewModels
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date")]
-
         public DateTime LogDate { get; set; } = DateTime.Now;
 
         [Required]
         [Range(0.0, 1000.0)]
         [Display(Name ="Weight")]
         public float WeightValue { get; set; }
+
     }
 }
