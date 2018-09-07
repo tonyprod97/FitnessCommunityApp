@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using FitnessCommunity.Models;
 using FitnessCommunity.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using FitnessCommunity.Data;
 using AutoMapper;
 using FitnessCommunity.Services;
 
@@ -30,9 +29,13 @@ namespace FitnessCommunity.Controllers
         }
 
         [HttpGet("Create")]
-        public IActionResult CreateWeightLog()
+        public async Task<IActionResult> CreateWeightLog()
         {
-            return View();
+            ApplicationUser user = await _applicationUserService.GetUserByEmail(this.User.Identity.Name);
+            ViewBag.MeasureType = user.MeasureType;
+            return View(new WeightLogViewModel {
+                LogDate = DateTime.Now
+            });
         }
 
         [HttpPost("Create")]
@@ -49,7 +52,7 @@ namespace FitnessCommunity.Controllers
                 
                 await _weigtLogManageService.Save();
 
-                return RedirectToAction(nameof(HomeController.Index), "Home"); ;
+                return RedirectToAction(nameof(TableController.Index), "Table"); ;
             }
 
             return View(weightLogViewModel);
@@ -70,6 +73,7 @@ namespace FitnessCommunity.Controllers
        public async Task<IActionResult> EditWeightLog(TableWeightLogViewModel weightLogViewModel)
         {
             await _weigtLogManageService.UpdateWeightLog(weightLogViewModel);
+            await _weigtLogManageService.Save();
 
             return RedirectToAction(nameof(TableController.Index),"Table");
         }

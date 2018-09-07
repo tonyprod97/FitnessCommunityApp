@@ -31,7 +31,16 @@ namespace FitnessCommunity.Services
 
         public void Add(WeightLog weightLog)
         {
-            _context.WeightLogs.AddAsync(weightLog);     
+            WeightLog weightLogFromDatabase = _context.WeightLogs.FirstOrDefault(wl => wl.LogDate == weightLog.LogDate);
+            if (weightLogFromDatabase == null)
+            {
+                _context.WeightLogs.AddAsync(weightLog);
+            }
+            else
+            {
+                weightLogFromDatabase.WeightValue = weightLog.WeightValue;
+                _context.WeightLogs.Update(weightLogFromDatabase);
+            }
         }
 
         public Task<WeightLog> FindWeightLogById(int id)

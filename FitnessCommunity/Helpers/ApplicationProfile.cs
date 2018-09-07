@@ -15,6 +15,8 @@ namespace FitnessCommunity.Helpers
             CreateMap<WeightLog, WeightLogViewModel>();
             CreateMap<WeightLogViewModel, WeightLog>();
             CreateMap<WeightLog, TableWeightLogViewModel>();
+            CreateMap<ApplicationUser, ProfileViewModel>();
+            CreateMap<ProfileViewModel, ApplicationUser>();
         }
     }
 }

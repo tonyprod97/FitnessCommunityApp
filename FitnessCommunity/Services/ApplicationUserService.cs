@@ -1,5 +1,6 @@
 ﻿using FitnessCommunity.Data;
 using FitnessCommunity.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,13 @@ namespace FitnessCommunity.Services
     public class ApplicationUserService: IApplicationUserService
     {
         private readonly ApplicationDbContext _conetxt;
-        public ApplicationUserService(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public ApplicationUserService(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _conetxt = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public Task<ApplicationUser> GetUserByEmail(string email)

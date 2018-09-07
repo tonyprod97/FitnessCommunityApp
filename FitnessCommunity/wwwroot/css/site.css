@@ -55,3 +55,7 @@ body {
 #weightLogsTable_filter label{
     font-size:medium;
 }
+
+.field-validation-error {
+    color:red;
+}

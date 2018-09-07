@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace FitnessCommunity.Models.ViewModels
 {
@@ -11,12 +9,12 @@ namespace FitnessCommunity.Models.ViewModels
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date")]
-        public DateTime LogDate { get; set; } = DateTime.Now;
+        public DateTime LogDate { get; set; }
 
         [Required]
         [Range(0.0, 1000.0)]
-        [Display(Name ="Weight")]
-        public float WeightValue { get; set; }
+        [Display(Name ="Weight in kg")]
+        public Nullable<float> WeightValue { get; set; }
 
     }
 }
