@@ -2,16 +2,22 @@
 @{
     ViewBag.Data = Json.Serialize(ViewBag.WeightLogs);
 }
+<div class="row">
+    <form method="post">
+        <div class="col-sm-4">
+            <label asp-for="StartingDate"></label>
+            <input asp-for="StartingDate" />
+            <button class="btn btn-default" type="submit">Apply</button>
+        </div>
+        <div class="col-sm-4">
+            <label asp-for="NumberOfLogs"></label>
+            <input asp-for="NumberOfLogs" />
+            <button class="btn btn-default" type="submit">Apply</button>
+        </div>
+    </form>
+</div>
 
-<form method="post">
-    <div class="row">
-        <label asp-for="StartingDate"></label>
-        <input asp-for="StartingDate" />
-        <button class="btn btn-default" type="submit">Apply</button>
-    </div>
-</form>
-<hr />
-<div id="chartContainer"></div>
+@await Html.PartialAsync("_ChartPartial")
 
 @section Scripts
     {
@@ -22,16 +28,15 @@
         for (var index = 0; index < serverData.length; index++) {
             data[index] = {
                 x: new Date(serverData[index].logDate),
-                y : serverData[index].weightValue
+                y: serverData[index].weightValue
             }
 
         }
-        console.log(serverData, data);
 
         $(document).ready(function () {
-            
-            
-            
+
+
+
             var options = {
                 title: {
                     text: "@ViewBag.Title"
@@ -40,7 +45,7 @@
                 exportEnabled: true,
                 data: [
                     {
-                        type: "spline", 
+                        type: "spline",
                         dataPoints: data
                     }
                 ]

@@ -18,7 +18,7 @@ namespace FitnessCommunity.Services
         Task Save();
         void Remove(WeightLog weightLog);
         Task UpdateWeightLog(TableWeightLogViewModel weightLogViewModel);
-        Task<IEnumerable<WeightLog>> GetWeightLogsSinceDate(ApplicationUser user, DateTime startingDate);
+        Task<IEnumerable<WeightLog>> GetWeightLogsSinceDate(ApplicationUser user, ChartViewModel chartViewModel);
     }
     public class WeigtLogService : IWeigtLogManageService
     {
@@ -52,13 +52,23 @@ namespace FitnessCommunity.Services
             });
         }
 
-        public Task<IEnumerable<WeightLog>> GetWeightLogsSinceDate(ApplicationUser user, DateTime startingDate)
+        public Task<IEnumerable<WeightLog>> GetWeightLogsSinceDate(ApplicationUser user, ChartViewModel chartViewModel)
         {
             return Task.Run(()=>
             {
-                IAsyncEnumerable<WeightLog> asyncWeightLogs = _context.WeightLogs.Where(wl => wl.ApplicationUser.Id == user.Id)
-                                                            .Where(wl => DateTime.Compare(wl.LogDate,startingDate)>0).ToAsyncEnumerable();
-                return asyncWeightLogs.ToEnumerable();
+                IEnumerable<WeightLog> weightLogs= null;
+
+                if (chartViewModel.StartingDate != null)
+                {
+                    weightLogs= _context.WeightLogs.Where(wl => wl.ApplicationUser.Id == user.Id)
+                                                        .Where(wl => DateTime.Compare(wl.LogDate, chartViewModel.StartingDate) > 0);
+                }
+                if (chartViewModel.NumberOfLogs != 0)
+                {
+                    weightLogs = weightLogs.Take(chartViewModel.NumberOfLogs);
+                }
+               
+                return weightLogs;
             });
         }
 

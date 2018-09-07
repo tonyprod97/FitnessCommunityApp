@@ -9,9 +9,12 @@ namespace FitnessCommunity.Models.ViewModels
     public class ChartViewModel
     {
         [DataType(DataType.Date)]
-        [Display(Name ="Since")]
+        [Display(Name ="Since: ")]
         public DateTime StartingDate { get; set; }
 
+
+        [Display(Name ="Number of Logs: ")]
+        [Range(1,int.MaxValue, ErrorMessage ="Only positive numbers allowed.")]
         public int NumberOfLogs { get; set; }
     }
 }

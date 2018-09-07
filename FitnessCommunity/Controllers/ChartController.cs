@@ -8,6 +8,7 @@ using FitnessCommunity.Models.ViewModels;
 using FitnessCommunity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace FitnessCommunity.Controllers
 {
@@ -32,18 +33,19 @@ namespace FitnessCommunity.Controllers
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
             ViewBag.Title = "Data since starting weight";
 
-            return View("Chart");
+            return View();
         }
 
      
         [HttpPost]
-        public async Task<IActionResult> DisplayWeightLogsSinceDate(DateTime startingDate)
+        public async Task<IActionResult> DisplayWeightLogsSinceDate(ChartViewModel chartViewModel)
         {
-            IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByEmail(this.User.Identity.Name),startingDate);
+            IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByEmail(this.User.Identity.Name),chartViewModel);
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
 
-            return View("Chart");
+            return View("DisplayChart");
         }
+
     }
 }
