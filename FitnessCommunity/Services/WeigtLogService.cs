@@ -56,16 +56,16 @@ namespace FitnessCommunity.Services
         {
             return Task.Run(()=>
             {
-                IEnumerable<WeightLog> weightLogs= null;
+                IEnumerable<WeightLog> weightLogs= _context.WeightLogs;
 
                 if (chartViewModel.StartingDate != null)
                 {
                     weightLogs= _context.WeightLogs.Where(wl => wl.ApplicationUser.Id == user.Id)
-                                                        .Where(wl => DateTime.Compare(wl.LogDate, chartViewModel.StartingDate) > 0);
+                                                        .Where(wl => DateTime.Compare(wl.LogDate, (DateTime)chartViewModel.StartingDate) > 0);
                 }
-                if (chartViewModel.NumberOfLogs != 0)
+                if (chartViewModel.NumberOfLogs != null)
                 {
-                    weightLogs = weightLogs.Take(chartViewModel.NumberOfLogs);
+                    weightLogs = weightLogs.Take((int)chartViewModel.NumberOfLogs);
                 }
                
                 return weightLogs;
@@ -86,7 +86,7 @@ namespace FitnessCommunity.Services
         {
             return Task.Run(()=>
             {
-                WeightLog weightLog = _context.WeightLogs.Find(weightLogViewModel);
+                WeightLog weightLog = _context.WeightLogs.Find(weightLogViewModel.Id);
 
                 weightLog.WeightValue = weightLogViewModel.WeightValue;
 

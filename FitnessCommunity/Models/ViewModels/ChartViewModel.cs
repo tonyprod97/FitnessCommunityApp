@@ -10,11 +10,11 @@ namespace FitnessCommunity.Models.ViewModels
     {
         [DataType(DataType.Date)]
         [Display(Name ="Since: ")]
-        public DateTime StartingDate { get; set; }
+        public Nullable<DateTime> StartingDate { get; set; }
 
 
         [Display(Name ="Number of Logs: ")]
         [Range(1,int.MaxValue, ErrorMessage ="Only positive numbers allowed.")]
-        public int NumberOfLogs { get; set; }
+        public Nullable<int> NumberOfLogs { get; set; }
     }
 }

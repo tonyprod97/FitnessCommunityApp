@@ -12,17 +12,6 @@ body {
     padding-right: 15px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
 /* QR code generator */
 #qrCode {
     margin: 15px;
@@ -34,4 +23,35 @@ body {
     .carousel-caption {
         display: none;
     }
+}
+
+
+#tableHeader {
+    background-color:sandybrown;
+    color:dimgrey;
+}
+
+#chartPictureContainer {
+    height:400px;
+}
+
+#weightLogsTable {
+    margin-top:15px;
+}
+
+#weightLogsTable_length select {
+    margin-left:5px;
+    margin-right:5px;
+}
+
+#weightLogsTable_length label {
+    font-size:medium;
+}
+
+#weightLogsTable_filter input {
+    margin-left: 5px;
+}
+
+#weightLogsTable_filter label{
+    font-size:medium;
 }

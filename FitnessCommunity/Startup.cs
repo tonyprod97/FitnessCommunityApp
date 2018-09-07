@@ -64,8 +64,8 @@ namespace FitnessCommunity
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseStaticFiles();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>

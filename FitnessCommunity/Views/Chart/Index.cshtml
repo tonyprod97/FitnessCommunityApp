@@ -3,22 +3,25 @@
     ViewBag.Data = Json.Serialize(ViewBag.WeightLogs);
 }
 <div class="row">
-    <form method="post">
+    <form asp-action="Index" method="post">
         <div class="col-sm-4">
             <label asp-for="StartingDate"></label>
             <input asp-for="StartingDate" />
-            <button class="btn btn-default" type="submit">Apply</button>
+            <span asp-validation-for="StartingDate"></span>
+            <button class="btn btn-default btn-sm" type="submit">Apply</button>
         </div>
         <div class="col-sm-4">
             <label asp-for="NumberOfLogs"></label>
             <input asp-for="NumberOfLogs" />
-            <button class="btn btn-default" type="submit">Apply</button>
+            <span asp-validation-for="NumberOfLogs"></span>
+            <button class="btn btn-default btn-sm" type="submit">Apply</button>
         </div>
     </form>
 </div>
-
-@await Html.PartialAsync("_ChartPartial")
-
+<h5> You can download your current graph by clicking on menu in top right corner of chart picture.</h5>
+<div id="chartPictureContainer">
+    <div id="chartContainer"></div>
+</div>
 @section Scripts
     {
     <script>

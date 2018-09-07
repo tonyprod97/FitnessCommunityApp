@@ -26,7 +26,7 @@ namespace FitnessCommunity.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> DisplayChart()
+        public async Task<IActionResult> Index()
         {
             IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetAllWeightLogs(await _applicationUserService.GetUserByEmail(this.User.Identity.Name));
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
@@ -43,8 +43,8 @@ namespace FitnessCommunity.Controllers
             IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByEmail(this.User.Identity.Name),chartViewModel);
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
-
-            return View("DisplayChart");
+            ViewBag.Title ="Data since: "+chartViewModel.StartingDate.Value.ToShortDateString();
+            return View("Index");
         }
 
     }
