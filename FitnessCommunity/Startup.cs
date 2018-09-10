@@ -49,6 +49,9 @@ namespace FitnessCommunity
             services.AddTransient<IWeigtLogManageService, WeigtLogService>();
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
             services.AddTransient<ApplicationUserService>();
+
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+                options.TokenLifespan = TimeSpan.FromHours(3));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
