@@ -11,6 +11,6 @@ namespace FitnessCommunity.Models.ViewModels
         [DataType(DataType.Date)]
         public DateTime LogDate { get; set; }
         public float WeightValue { get; set; }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

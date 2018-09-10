@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace FitnessCommunity.Models
 {
@@ -15,5 +16,8 @@ namespace FitnessCommunity.Models
 
         [PersonalData]
         public string PublicInfo { get; set; }
+
+       
+        public List<WeightLog> WeightLogs { get; set; } = new List<WeightLog>();
     }
 }

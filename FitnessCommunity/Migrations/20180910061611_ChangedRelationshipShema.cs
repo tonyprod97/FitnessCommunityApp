@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FitnessCommunity.Migrations
 {
-    public partial class Initial : Migration
+    public partial class ChangedRelationshipShema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,11 @@ namespace FitnessCommunity.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    MeasureType = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    PublicInfo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -157,9 +161,8 @@ namespace FitnessCommunity.Migrations
                 name: "WeightLogs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationUserId = table.Column<string>(nullable: true),
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     LogDate = table.Column<DateTime>(nullable: false),
                     WeightValue = table.Column<float>(nullable: false)
                 },
@@ -167,8 +170,8 @@ namespace FitnessCommunity.Migrations
                 {
                     table.PrimaryKey("PK_WeightLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WeightLogs_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_WeightLogs_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -214,9 +217,9 @@ namespace FitnessCommunity.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WeightLogs_ApplicationUserId",
+                name: "IX_WeightLogs_UserId",
                 table: "WeightLogs",
-                column: "ApplicationUserId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

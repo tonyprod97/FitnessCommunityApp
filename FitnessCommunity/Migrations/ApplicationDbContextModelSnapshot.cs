@@ -80,19 +80,18 @@ namespace FitnessCommunity.Migrations
 
             modelBuilder.Entity("FitnessCommunity.Models.WeightLog", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("LogDate");
+
+                    b.Property<string>("UserId");
 
                     b.Property<float>("WeightValue");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("WeightLogs");
                 });
@@ -209,9 +208,9 @@ namespace FitnessCommunity.Migrations
 
             modelBuilder.Entity("FitnessCommunity.Models.WeightLog", b =>
                 {
-                    b.HasOne("FitnessCommunity.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("FitnessCommunity.Models.ApplicationUser", "User")
+                        .WithMany("WeightLogs")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

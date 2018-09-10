@@ -29,8 +29,8 @@
                         </td>
                         <td>
                             <label style="width:35px"> @log.WeightValue</label>
-                            <a asp-controller="WeightLog" asp-action="DeleteWeightLog" asp-route-id="@log.Id" class="btn btn-warning btn-xs">Delete</a>
-                            <a asp-controller="WeightLog" asp-action="EditWeightLog" asp-route-id="@log.Id" class="btn btn-info btn-xs">Edit</a>
+                            <a asp-area="" asp-controller="WeightLog" asp-action="Delete" asp-route-id="@log.Id" class="btn btn-warning btn-xs">Delete</a>
+                            <a asp-area="" asp-controller="WeightLog" asp-action="Edit" asp-route-id="@log.Id" class="btn btn-info btn-xs">Edit</a>
                         </td>
                     </tr>
                 }

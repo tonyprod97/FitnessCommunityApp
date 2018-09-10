@@ -115,7 +115,7 @@ namespace FitnessCommunity.Controllers
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-
+        
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()

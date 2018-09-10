@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitnessCommunity.Models
 {
     public class WeightLog
     {
-        public int Id { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public Guid Id { get; set; }
+
+        public string UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public ApplicationUser User { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

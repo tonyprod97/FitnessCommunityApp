@@ -13,7 +13,6 @@ using FitnessCommunity.Services;
 namespace FitnessCommunity.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
     public class WeightLogController : Controller
     {
         private readonly IMapper _mapper;
@@ -28,29 +27,27 @@ namespace FitnessCommunity.Controllers
             _applicationUserService = applicationUserService;
         }
 
-        [HttpGet("Create")]
-        public async Task<IActionResult> CreateWeightLog()
+        [HttpGet]
+        public async Task<IActionResult> Create()
         {
-            ApplicationUser user = await _applicationUserService.GetUserByEmail(this.User.Identity.Name);
+            ApplicationUser user = await _applicationUserService.GetUserByName(this.User.Identity.Name);
             ViewBag.MeasureType = user.MeasureType;
             return View(new WeightLogViewModel {
                 LogDate = DateTime.Now
             });
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreateWeightLog(WeightLogViewModel weightLogViewModel )
+        [HttpPost]
+        public async Task<IActionResult> Create(WeightLogViewModel weightLogViewModel )
         {
             if (ModelState.IsValid)
             {
                 WeightLog newWeightLog = _mapper.Map<WeightLog>(weightLogViewModel);
 
-                var user = await _applicationUserService.GetUserByEmail(this.User.Identity.Name);
+                var user = await _applicationUserService.GetUserByName(this.User.Identity.Name);
 
-                newWeightLog.ApplicationUser = user;
-                _weigtLogManageService.Add(newWeightLog);
-                
-                await _weigtLogManageService.Save();
+                newWeightLog.User = user;
+                await _weigtLogManageService.Add(newWeightLog);
 
                 return RedirectToAction(nameof(TableController.Index), "Table"); ;
             }
@@ -59,8 +56,8 @@ namespace FitnessCommunity.Controllers
         }
 
         
-        [HttpGet("Edit/{id}")]
-        public async Task<IActionResult> EditWeightLog(int id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
         {
             WeightLog weightLog = await _weigtLogManageService.FindWeightLogById(id);
             WeightLogViewModel weightLogViewModel = _mapper.Map<WeightLogViewModel>(weightLog);
@@ -68,25 +65,22 @@ namespace FitnessCommunity.Controllers
             return View(weightLogViewModel);
         }
 
-        [HttpPost("Edit/{id}")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-       public async Task<IActionResult> EditWeightLog(TableWeightLogViewModel weightLogViewModel)
+       public async Task<IActionResult> Edit(TableWeightLogViewModel weightLogViewModel)
         {
             await _weigtLogManageService.UpdateWeightLog(weightLogViewModel);
-            await _weigtLogManageService.Save();
 
             return RedirectToAction(nameof(TableController.Index),"Table");
         }
         
-        [HttpDelete("Delete/{id}")]
-        [HttpGet("Delete/{id}")]
-        public async Task<IActionResult> DeleteWeightLog(int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
         {
             WeightLog weightLog = await _weigtLogManageService.FindWeightLogById(id);
 
-            _weigtLogManageService.Remove(weightLog);
-            await _weigtLogManageService.Save();
-            
+            await _weigtLogManageService.Remove(weightLog);
+
             return RedirectToAction(nameof(TableController.Index), "Table");
         }
         

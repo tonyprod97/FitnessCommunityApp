@@ -28,7 +28,7 @@ namespace FitnessCommunity.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetAllWeightLogs(await _applicationUserService.GetUserByEmail(this.User.Identity.Name));
+            IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetAllWeightLogs(await _applicationUserService.GetUserByName(this.User.Identity.Name));
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
             ViewBag.Title = "Data since starting weight";
@@ -40,7 +40,7 @@ namespace FitnessCommunity.Controllers
         [HttpPost]
         public async Task<IActionResult> DisplayWeightLogsSinceDate(ChartViewModel chartViewModel)
         {
-            IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByEmail(this.User.Identity.Name),chartViewModel);
+            IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByName(this.User.Identity.Name),chartViewModel);
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
             if(chartViewModel.StartingDate!=null) ViewBag.Title ="Data since: "+chartViewModel.StartingDate.Value.ToShortDateString();

@@ -6,10 +6,12 @@ using AutoMapper;
 using FitnessCommunity.Models;
 using FitnessCommunity.Models.ViewModels;
 using FitnessCommunity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessCommunity.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
 
@@ -23,9 +25,21 @@ namespace FitnessCommunity.Controllers
         }
         public async  Task<IActionResult> Index()
         {
-            ApplicationUser user = await _userService.GetUserByEmail(this.User.Identity.Name);
+            ApplicationUser user = await _userService.GetUserByName(this.User.Identity.Name);
             ProfileViewModel profileViewModel = _mapper.Map<ProfileViewModel>(user);
             return View(profileViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(ProfileViewModel profileViewModel)
+        {
+            if (!ModelState.IsValid) return View("Index",profileViewModel);
+            ApplicationUser user = await _userService.GetUserByName(this.User.Identity.Name);
+            string currentEmail = user.Email;
+
+            await _userService.UpdateUserProfile(profileViewModel,currentEmail);
+
+            return RedirectToAction(nameof(HomeController.Index),"Home");
+        }        
     }
 }

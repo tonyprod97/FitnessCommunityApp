@@ -6,6 +6,9 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-left">
         <ul class="nav navbar-nav navbar-left">
             <li>
+                <a asp-controller="WeightLog" asp-action="Create">Weight Logs</a>
+            </li>
+            <li>
                 <a asp-area="" asp-controller="Table" asp-action="Index">Table</a>
             </li>
             <li>
@@ -17,7 +20,7 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-controller="Profile" asp-action="Index">Hello @UserManager.GetUserName(User)</a>
+                <a asp-controller="Profile" asp-action="Index"><u>My Profile</u></a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>

@@ -7,10 +7,12 @@ using FitnessCommunity.Data;
 using FitnessCommunity.Models;
 using FitnessCommunity.Models.ViewModels;
 using FitnessCommunity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessCommunity.Controllers
 {
+    [Authorize]
     public class TableController : Controller
     {
         private readonly IMapper _mapper;
@@ -26,7 +28,7 @@ namespace FitnessCommunity.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            ApplicationUser user = await _applicationUserService.GetUserByEmail(this.User.Identity.Name);
+            ApplicationUser user = await _applicationUserService.GetUserByName(this.User.Identity.Name);
             IEnumerable<TableWeightLogViewModel> tableWeightLogsViewModel =
                 _mapper.Map<IEnumerable<TableWeightLogViewModel>>(await _weigtLogManageService.GetAllWeightLogs(user));
 
