@@ -14,6 +14,8 @@ namespace FitnessCommunity.Services
     {
         Task<ApplicationUser> GetUserByName(string userName);
         Task UpdateUserProfile(ProfileViewModel profileViewModel,string email);
+
+        Task<String> GetUserEmail(string userName);
     }
     public class ApplicationUserService: IApplicationUserService
     {
@@ -33,8 +35,14 @@ namespace FitnessCommunity.Services
         {
             return Task.Run(()=>
             {
-                return _conetxt.Users.FirstOrDefault(u => u.UserName == userName);
+                return _userManager.FindByNameAsync(userName);
             });
+        }
+
+        public async Task<string> GetUserEmail(string userName)
+        {
+            ApplicationUser user = await GetUserByName(userName);
+            return  user.Email;
         }
 
         public Task UpdateUserProfile(ProfileViewModel profileViewModel,string email)
