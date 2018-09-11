@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FitnessCommunity.Data;
+using FitnessCommunity.Helpers.Settings;
 using FitnessCommunity.Models;
 using FitnessCommunity.Services;
 using Microsoft.AspNetCore.Builder;
@@ -49,6 +50,7 @@ namespace FitnessCommunity
             services.AddTransient<IWeigtLogManageService, WeigtLogService>();
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
             services.AddTransient<ApplicationUserService>();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.Configure<DataProtectionTokenProviderOptions>(options =>
                 options.TokenLifespan = TimeSpan.FromHours(3));

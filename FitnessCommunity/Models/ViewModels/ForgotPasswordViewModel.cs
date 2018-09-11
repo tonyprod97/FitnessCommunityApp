@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessCommunity.Models
 {
-    public class ForgotPasswordModel
+    public class ForgotPasswordViewModel
     {
         [Required]
         [EmailAddress]
