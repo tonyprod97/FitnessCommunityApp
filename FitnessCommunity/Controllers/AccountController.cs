@@ -121,7 +121,7 @@ namespace FitnessCommunity.Controllers
         public IActionResult Lockout()
         {
             return View();
-        }
+        }//TODO
 
         #region Helpers
         private void AddErrors(IdentityResult result)

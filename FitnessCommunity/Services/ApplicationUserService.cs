@@ -33,9 +33,10 @@ namespace FitnessCommunity.Services
 
         public Task<ApplicationUser> GetUserByName(string userName)
         {
+            var user = _conetxt.Users.FirstOrDefault(u => u.Email == userName || u.UserName == userName);
             return Task.Run(()=>
             {
-                return _userManager.FindByNameAsync(userName);
+                return user;
             });
         }
 
