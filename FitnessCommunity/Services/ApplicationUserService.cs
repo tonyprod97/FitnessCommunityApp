@@ -50,7 +50,6 @@ namespace FitnessCommunity.Services
         {
             ApplicationUser applicationUser =  _conetxt.Users.First(user => user.Email == email);
             _mapper.Map(profileViewModel,applicationUser);
-            _userManager.UpdateAsync(applicationUser);
             _conetxt.Users.Update(applicationUser);
 
             return _conetxt.SaveChangesAsync();

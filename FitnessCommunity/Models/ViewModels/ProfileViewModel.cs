@@ -1,4 +1,4 @@
-﻿using FitnessCommunity.Models.Enums;
+﻿using FitnessCommunity.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

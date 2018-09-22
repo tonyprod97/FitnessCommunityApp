@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FitnessCommunity.Models.Enums
+namespace FitnessCommunity.Enums
 {
     public enum MeasureType
     {
-        kg,lb
+        kg,lbs
     }
 }
