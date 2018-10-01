@@ -15,7 +15,7 @@ namespace FitnessCommunity.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -78,8 +78,8 @@ namespace FitnessCommunity.Data.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { Id = "2204dae4-6cb2-4dbd-aac8-972d486ed767", AccessFailedCount = 0, ConcurrencyStamp = "2b0716fa-51e0-432e-8a70-d76cc19fc153", Email = "test@test.com", EmailConfirmed = false, FirstName = "Ana", LastName = "Anic", LockoutEnabled = false, MeasureType = 0, NormalizedEmail = "TEST@TEST.COM", NormalizedUserName = "TEST@TEST.COM", PasswordHash = "AQAAAAEAACcQAAAAELDDBjldTca23egUkVYyY+T1RPphJETIEqcDq142PV6dR2hy4Zbu0d7VHlmzZDVrOg==", PhoneNumberConfirmed = false, SecurityStamp = "0e1df3ba-3d31-4ad7-8ed8-382a2e8555b9", TwoFactorEnabled = false, UserName = "test@test.com" },
-                        new { Id = "a5ee4b19-904d-4834-9faf-3074b29c6551", AccessFailedCount = 0, ConcurrencyStamp = "83999c03-0389-4815-bd53-2632090f67b4", Email = "test1@test.com", EmailConfirmed = false, FirstName = "Pero", LastName = "Peric", LockoutEnabled = false, MeasureType = 0, NormalizedEmail = "TEST1@TEST.COM", NormalizedUserName = "TEST1@TEST.COM", PasswordHash = "AQAAAAEAACcQAAAAELDDBjldTca23egUkVYyY+T1RPphJETIEqcDq142PV6dR2hy4Zbu0d7VHlmzZDVrOg==", PhoneNumberConfirmed = false, SecurityStamp = "68614e7e-9b05-42e8-a2db-1334c2abdcf1", TwoFactorEnabled = false, UserName = "test1@test.com" }
+                        new { Id = "2204dae4-6cb2-4dbd-aac8-972d486ed767", AccessFailedCount = 0, ConcurrencyStamp = "521cf4b3-505c-4700-af88-78bc8e4f8c7a", Email = "ana.anic@gmail.com", EmailConfirmed = false, FirstName = "Ana", LastName = "Anic", LockoutEnabled = false, MeasureType = 0, NormalizedEmail = "ANA.ANIC@GMAIL.COM", NormalizedUserName = "ANA.ANIC@GMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAELDDBjldTca23egUkVYyY+T1RPphJETIEqcDq142PV6dR2hy4Zbu0d7VHlmzZDVrOg==", PhoneNumberConfirmed = false, SecurityStamp = "2c1530ac-c46a-4649-990d-a131c5ccefb8", TwoFactorEnabled = false, UserName = "ana.anic@gmail.com" },
+                        new { Id = "a5ee4b19-904d-4834-9faf-3074b29c6551", AccessFailedCount = 0, ConcurrencyStamp = "963235e5-4572-414b-a420-8d7580573fb7", Email = "pero.peric@gmail.com", EmailConfirmed = false, FirstName = "Pero", LastName = "Peric", LockoutEnabled = false, MeasureType = 0, NormalizedEmail = "PERO.PERIC@GMAIL.COM", NormalizedUserName = "PERO.PERIC@GMAIL.COM", PasswordHash = "AQAAAAEAACcQAAAAELDDBjldTca23egUkVYyY+T1RPphJETIEqcDq142PV6dR2hy4Zbu0d7VHlmzZDVrOg==", PhoneNumberConfirmed = false, SecurityStamp = "7e3db214-2c8b-4d5a-b472-e3a6e5f0e1cd", TwoFactorEnabled = false, UserName = "pero.peric@gmail.com" }
                     );
                 });
 
@@ -101,26 +101,26 @@ namespace FitnessCommunity.Data.Migrations
                     b.ToTable("Logs");
 
                     b.HasData(
-                        new { Id = new Guid("f9c397fb-c94b-43ea-bbea-9d128b643cc9"), LogDate = new DateTime(2018, 9, 16, 21, 9, 52, 221, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 80f },
-                        new { Id = new Guid("86024fe0-d89b-4401-8e7f-f657ba14c386"), LogDate = new DateTime(2018, 9, 17, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 81f },
-                        new { Id = new Guid("5b0cc703-7435-4c58-8e2b-e38ee2536855"), LogDate = new DateTime(2018, 9, 18, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 82f },
-                        new { Id = new Guid("9eca5dab-1113-4179-b4ba-6477db9ac926"), LogDate = new DateTime(2018, 9, 19, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 83f },
-                        new { Id = new Guid("953f6200-f2ef-4d2e-ae40-31e1ccb423c8"), LogDate = new DateTime(2018, 9, 20, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 84f },
-                        new { Id = new Guid("b1904418-b8fa-4615-a899-d43f7bfef2c1"), LogDate = new DateTime(2018, 9, 21, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 85f },
-                        new { Id = new Guid("e38a64b5-3261-403a-a208-704ecc70fbb5"), LogDate = new DateTime(2018, 9, 22, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 86f },
-                        new { Id = new Guid("ad60cded-2966-46b2-8e01-e43065cc8837"), LogDate = new DateTime(2018, 9, 23, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 87f },
-                        new { Id = new Guid("af2d02df-6629-4a71-8521-5174b12ccae3"), LogDate = new DateTime(2018, 9, 24, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 88f },
-                        new { Id = new Guid("e304ead4-2edd-4e98-a562-9cef8cb922c2"), LogDate = new DateTime(2018, 9, 25, 21, 9, 52, 225, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 89f },
-                        new { Id = new Guid("1bd1b772-11c1-42d8-9d02-625506182c6f"), LogDate = new DateTime(2018, 9, 16, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 80f },
-                        new { Id = new Guid("e0fec932-86e9-4ff5-b319-cd6eef1c245d"), LogDate = new DateTime(2018, 9, 17, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 81f },
-                        new { Id = new Guid("8131aeeb-585c-4b2e-9758-9065038195e7"), LogDate = new DateTime(2018, 9, 18, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 82f },
-                        new { Id = new Guid("b9d4df67-8c44-470d-8691-dd47391a25c4"), LogDate = new DateTime(2018, 9, 19, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 83f },
-                        new { Id = new Guid("4872e588-d185-462f-a06a-fe0f2eb98291"), LogDate = new DateTime(2018, 9, 20, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 84f },
-                        new { Id = new Guid("36a79431-3468-464f-bef1-df08bebd12cc"), LogDate = new DateTime(2018, 9, 21, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 85f },
-                        new { Id = new Guid("22684c6e-8890-4be9-825d-660fbfb82c4e"), LogDate = new DateTime(2018, 9, 22, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 86f },
-                        new { Id = new Guid("e94a287f-5380-4011-bf47-5bb569347808"), LogDate = new DateTime(2018, 9, 23, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 87f },
-                        new { Id = new Guid("b215c365-c1ce-4b48-82bc-63339f046d30"), LogDate = new DateTime(2018, 9, 24, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 88f },
-                        new { Id = new Guid("eeaf5608-8203-4c07-a843-0d73c825653b"), LogDate = new DateTime(2018, 9, 25, 21, 9, 52, 225, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 89f }
+                        new { Id = new Guid("8c2a57f3-2556-4958-ae64-51633a8d85d0"), LogDate = new DateTime(2018, 10, 1, 22, 19, 37, 558, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 80f },
+                        new { Id = new Guid("bb4718b3-39df-48dd-b90b-998e5c337df3"), LogDate = new DateTime(2018, 10, 2, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 81f },
+                        new { Id = new Guid("1b62eabe-77c5-4d08-8f80-97175b404731"), LogDate = new DateTime(2018, 10, 3, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 82f },
+                        new { Id = new Guid("1ad55c84-e395-4e6f-a751-cbaeef7e9f74"), LogDate = new DateTime(2018, 10, 4, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 83f },
+                        new { Id = new Guid("fcefc728-1517-4c1d-9005-929a27146391"), LogDate = new DateTime(2018, 10, 5, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 84f },
+                        new { Id = new Guid("40d86e42-dca5-431a-adc9-fc5cf12814ed"), LogDate = new DateTime(2018, 10, 6, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 85f },
+                        new { Id = new Guid("4f7cef42-cb41-4fde-acb1-4f25007443b5"), LogDate = new DateTime(2018, 10, 7, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 86f },
+                        new { Id = new Guid("cc8ac79c-f879-4f2d-b9e8-ed3848de1124"), LogDate = new DateTime(2018, 10, 8, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 87f },
+                        new { Id = new Guid("8561d89b-b3f0-40e3-a345-5a388f0896da"), LogDate = new DateTime(2018, 10, 9, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 88f },
+                        new { Id = new Guid("91998422-08d2-45c0-b7d6-e720c0bf0626"), LogDate = new DateTime(2018, 10, 10, 22, 19, 37, 560, DateTimeKind.Local), UserId = "a5ee4b19-904d-4834-9faf-3074b29c6551", WeightValue = 89f },
+                        new { Id = new Guid("2a6994c9-54fb-4cd9-956f-d9257b82f914"), LogDate = new DateTime(2018, 10, 1, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 80f },
+                        new { Id = new Guid("36173845-6235-4d04-a2a8-a2e516ea98f2"), LogDate = new DateTime(2018, 10, 2, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 81f },
+                        new { Id = new Guid("bf8aefc8-5113-40f8-bfc4-90c233dc7151"), LogDate = new DateTime(2018, 10, 3, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 82f },
+                        new { Id = new Guid("caddad0a-644f-4b00-b0af-51f1680f74be"), LogDate = new DateTime(2018, 10, 4, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 83f },
+                        new { Id = new Guid("07889197-1780-477b-85aa-c773dc6bb6e1"), LogDate = new DateTime(2018, 10, 5, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 84f },
+                        new { Id = new Guid("cffc6503-53dd-44d5-b3c4-22e4471f7855"), LogDate = new DateTime(2018, 10, 6, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 85f },
+                        new { Id = new Guid("0b32db60-31ff-43b8-8528-abc903edf4a6"), LogDate = new DateTime(2018, 10, 7, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 86f },
+                        new { Id = new Guid("d8aae1e1-0051-4440-9e3f-9756421dd0fa"), LogDate = new DateTime(2018, 10, 8, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 87f },
+                        new { Id = new Guid("ab38039b-e5a8-46e4-aa01-3a559d5714e4"), LogDate = new DateTime(2018, 10, 9, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 88f },
+                        new { Id = new Guid("4b7f5564-1bd9-4ce5-9735-d7350400a43c"), LogDate = new DateTime(2018, 10, 10, 22, 19, 37, 560, DateTimeKind.Local), UserId = "2204dae4-6cb2-4dbd-aac8-972d486ed767", WeightValue = 89f }
                     );
                 });
 

@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-4">
             <label asp-for="NumberOfLogs"></label>
-            <input asp-for="NumberOfLogs" />
+            <input asp-for="NumberOfLogs" type="number" min="0" />
             <span asp-validation-for="NumberOfLogs"></span>
             <button class="btn btn-default btn-sm" type="submit">Apply</button>
         </div>
@@ -24,6 +24,9 @@
 </div>
 @section Scripts
     {
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
     <script>
         var data = [];
         var serverData = @ViewBag.Data;

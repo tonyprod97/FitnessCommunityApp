@@ -29,10 +29,10 @@ namespace FitnessCommunity.Data
                 new ApplicationUser()
                 {
                     Id = "2204dae4-6cb2-4dbd-aac8-972d486ed767",
-                    Email = "test@test.com",
-                    NormalizedEmail = "test@test.com".ToUpper(),
-                    UserName = "test@test.com",
-                    NormalizedUserName = "test@test.com".ToUpper(),
+                    Email = "ana.anic@gmail.com",
+                    NormalizedEmail = "ana.anic@gmail.com".ToUpper(),
+                    UserName = "ana.anic@gmail.com",
+                    NormalizedUserName = "ana.anic@gmail.com".ToUpper(),
                     PasswordHash = "AQAAAAEAACcQAAAAELDDBjldTca23egUkVYyY+T1RPphJETIEqcDq142PV6dR2hy4Zbu0d7VHlmzZDVrOg==",//Password is: Testing1!
                     FirstName = "Ana",
                     LastName = "Anic",
@@ -41,10 +41,10 @@ namespace FitnessCommunity.Data
                 new ApplicationUser()
                 {
                     Id = "a5ee4b19-904d-4834-9faf-3074b29c6551",
-                    Email = "test1@test.com",
-                    NormalizedEmail = "test1@test.com".ToUpper(),
-                    UserName = "test1@test.com",
-                    NormalizedUserName = "test1@test.com".ToUpper(),
+                    Email = "pero.peric@gmail.com",
+                    NormalizedEmail = "pero.peric@gmail.com".ToUpper(),
+                    UserName = "pero.peric@gmail.com",
+                    NormalizedUserName = "pero.peric@gmail.com".ToUpper(),
                     PasswordHash = "AQAAAAEAACcQAAAAELDDBjldTca23egUkVYyY+T1RPphJETIEqcDq142PV6dR2hy4Zbu0d7VHlmzZDVrOg==",//Password is: Testing1!
                     FirstName = "Pero",
                     LastName = "Peric",
