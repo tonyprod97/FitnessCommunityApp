@@ -43,7 +43,7 @@ namespace FitnessCommunity.Controllers
             IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByName(this.User.Identity.Name),chartViewModel);
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
-            if(chartViewModel.StartingDate!=null) ViewBag.Title ="Data since: "+chartViewModel.StartingDate.Value.ToShortDateString();
+            if(chartViewModel.StartingDate!=null) ViewBag.Title ="Data since: "+chartViewModel.StartingDate.Value.ToLocalTime().ToShortDateString();
             return View("Index");
         }
 

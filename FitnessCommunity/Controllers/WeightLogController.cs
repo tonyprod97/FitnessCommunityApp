@@ -47,6 +47,9 @@ namespace FitnessCommunity.Controllers
                 var user = await _applicationUserService.GetUserByName(this.User.Identity.Name);
 
                 newWeightLog.User = user;
+
+                newWeightLog = user.MeasureType == Enums.MeasureType.lbs ? WeightConverter.ConvertToKg(newWeightLog) : newWeightLog;
+
                 await _weigtLogManageService.Add(newWeightLog);
 
                 return RedirectToAction(nameof(TableController.Index), "Table"); ;

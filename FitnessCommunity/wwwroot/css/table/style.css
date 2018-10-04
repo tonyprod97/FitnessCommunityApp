@@ -1,0 +1,8 @@
+td .right-row {
+  float: left;
+  display: inline;
+  margin: 0px 4px;
+}
+td .right-row label {
+  margin-right: 15px !important;
+}

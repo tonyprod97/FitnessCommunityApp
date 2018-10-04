@@ -50,8 +50,9 @@ namespace FitnessCommunity
             services.AddTransient<IWeigtLogManageService, WeigtLogService>();
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
             services.AddTransient<ApplicationUserService>();
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<EmailSenderService>();
 
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<DataProtectionTokenProviderOptions>(options =>
                 options.TokenLifespan = TimeSpan.FromHours(3));
         }

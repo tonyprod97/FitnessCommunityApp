@@ -34,9 +34,10 @@ namespace FitnessCommunity.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        public IActionResult Register( string email, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            if(!String.IsNullOrEmpty(email)) ViewBag.Email = email; ;
             return View();
         }
 
@@ -82,6 +83,7 @@ namespace FitnessCommunity.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)

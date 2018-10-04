@@ -32,6 +32,14 @@ namespace FitnessCommunity.Controllers
             IEnumerable<TableWeightLogViewModel> tableWeightLogsViewModel =
                 _mapper.Map<IEnumerable<TableWeightLogViewModel>>(await _weigtLogManageService.GetAllWeightLogs(user));
 
+            if (user.MeasureType == Enums.MeasureType.lbs)
+                tableWeightLogsViewModel = tableWeightLogsViewModel.Select(log => 
+                                {
+                                    var logForConvert = _mapper.Map<WeightLog>(log);
+                                    log.WeightValue = WeightConverter.ConvertToLbs(logForConvert).WeightValue;
+                                    return log;
+                                });
+
             return View(tableWeightLogsViewModel);
         }
     }

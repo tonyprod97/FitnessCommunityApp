@@ -1,20 +1,23 @@
 ﻿@model IEnumerable<TableWeightLogViewModel>
+@inject UserManager<ApplicationUser> userManager;
 @{
     ViewData["Title"] = "Table";
+    var user = (await userManager.FindByNameAsync(User.Identity.Name)) as ApplicationUser;
+    ViewBag.MeasureType = user.MeasureType;
 }
+<link type="text/css" rel="stylesheet/less" href="~/css/table/style.css" />
 
 <div style="width:60%">
 
     <table class="table table-striped table-hover table-responsive" id="weightLogsTable">
         <thead>
-            <tr class="text-uppercase" id="tableHeader" >
+            <tr class="text-uppercase" id="tableHeader">
                 <th>
                     Date
                     <span class="glyphicon glyphicon-sort-by-attributes"></span>
                 </th>
                 <th>
-                    Weight:
-                    <span class="glyphicon glyphicon-sort-by-order"></span>
+                    Weight in @ViewBag.MeasureType <span class="glyphicon glyphicon-sort-by-order"></span>
                 </th>
             </tr>
         </thead>
@@ -27,8 +30,8 @@
                         <td>
                             @log.LogDate.ToShortDateString()
                         </td>
-                        <td>
-                            <label style="width:35px"> @log.WeightValue</label>
+                        <td class="right-row">
+                            <label> @log.WeightValue</label>
                             <a asp-area="" asp-controller="WeightLog" asp-action="Delete" asp-route-id="@log.Id" class="btn btn-info btn-xs">Delete</a>
                             <a asp-area="" asp-controller="WeightLog" asp-action="Edit" asp-route-id="@log.Id" class="btn btn-primary btn-xs">Edit</a>
                         </td>

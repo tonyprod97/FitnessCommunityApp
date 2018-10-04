@@ -25,17 +25,17 @@ namespace FitnessCommunity.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly EmailSettings _emaiSettings;
+        private readonly EmailSenderService _emailSender;
 
         public ProfileController(IApplicationUserService userService, IMapper mapper, 
             UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            IOptions<EmailSettings> emailSettings)
+            IOptions<EmailSettings> emailSettings, EmailSenderService emailSender)
         {
             _userService = userService;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _emaiSettings = emailSettings.Value;
+            _emailSender = emailSender;
         }
         public async  Task<IActionResult> Index()
         {
@@ -48,10 +48,9 @@ namespace FitnessCommunity.Controllers
         public async Task<IActionResult> UpdateProfile(ProfileViewModel profileViewModel)
         {
             if (!ModelState.IsValid) return View("Index",profileViewModel);
-            ApplicationUser user = await _userService.GetUserByName(this.User.Identity.Name);
-            string currentEmail = user.Email;
+            ApplicationUser user = await _userService.GetUserByName(User.Identity.Name);
 
-            await _userService.UpdateUserProfile(profileViewModel,currentEmail);
+            await _userService.UpdateUserProfile(profileViewModel,user.Email);
 
             return RedirectToAction(nameof(HomeController.Index),"Home");
         }
@@ -84,12 +83,16 @@ namespace FitnessCommunity.Controllers
                     var resetUrl = Url.Action("ResetPassword", "Profile",
                         new { token = token, email = user.Email }, Request.Scheme);
 
-                    configureSendingMail(user.Email,resetUrl);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    _emailSender.ConfigureSendingMail(user.Email,resetUrl,true);
+                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
                 }
                 else
                 {
-                    //send email and inform that they don't have account
+                    var registerUrl = Url.Action("Register", "Account",
+                        new RegisterViewModel { Email = forgotPasswordViewModel.Email }, Request.Scheme);
+                    _emailSender.ConfigureSendingMail(forgotPasswordViewModel.Email, "You are unknown member for us. Please make sure that you have registered. You can reister here: "+registerUrl, false);
+                    return RedirectToAction(nameof(AccountController.Register), "Account",
+                        new RegisterViewModel() { Email = forgotPasswordViewModel.Email});
                 }
             }
             return RedirectToAction(nameof(HomeController.Index), "Home");
@@ -130,25 +133,10 @@ namespace FitnessCommunity.Controllers
             return View();
         }
 
-        private void configureSendingMail(string toAdress, string resetUrl)
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordConfirmation()
         {
-            var message = new MimeMessage();
-
-            message.From.Add(new MailboxAddress("FitnessCommunity", _emaiSettings.Sender));
-            message.To.Add(new MailboxAddress("Testing", toAdress));
-
-            message.Subject = "Reset Password Link";
-            message.Body = new TextPart("plain") {
-                Text = resetUrl
-            };
-
-            using (var client = new SmtpClient())
-            {
-                client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate(_emaiSettings.Sender,_emaiSettings.Password);
-                client.Send(message);
-                client.Disconnect(true);
-            }
+            return View();
         }
     }
 }
