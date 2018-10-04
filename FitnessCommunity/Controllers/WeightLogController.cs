@@ -63,8 +63,13 @@ namespace FitnessCommunity.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             WeightLog weightLog = await _weigtLogManageService.FindWeightLogById(id);
-            WeightLogViewModel weightLogViewModel = _mapper.Map<WeightLogViewModel>(weightLog);
 
+            var user = await _applicationUserService.GetUserByName(this.User.Identity.Name);
+            ViewBag.MeasureType = user.MeasureType;
+            if (user.MeasureType == Enums.MeasureType.lbs)
+                weightLog = WeightConverter.ConvertToLbs(weightLog);
+
+            WeightLogViewModel weightLogViewModel = _mapper.Map<WeightLogViewModel>(weightLog);
             return View(weightLogViewModel);
         }
 
@@ -72,6 +77,11 @@ namespace FitnessCommunity.Controllers
         [ValidateAntiForgeryToken]
        public async Task<IActionResult> Edit(TableWeightLogViewModel weightLogViewModel)
         {
+            var user = await _applicationUserService.GetUserByName(this.User.Identity.Name);
+
+            if (user.MeasureType == Enums.MeasureType.lbs)
+                weightLogViewModel.WeightValue = WeightConverter.ConvertToKg(_mapper.Map<WeightLog>(weightLogViewModel)).WeightValue;
+
             await _weigtLogManageService.UpdateWeightLog(weightLogViewModel);
 
             return RedirectToAction(nameof(TableController.Index),"Table");

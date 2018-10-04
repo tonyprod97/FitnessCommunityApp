@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<TableWeightLogViewModel>
 @inject UserManager<ApplicationUser> userManager;
 @{
-    ViewData["Title"] = "Table";
     var user = (await userManager.FindByNameAsync(User.Identity.Name)) as ApplicationUser;
     ViewBag.MeasureType = user.MeasureType;
 }
-<link type="text/css" rel="stylesheet/less" href="~/css/table/style.css" />
+<link type="text/css" rel="stylesheet" href="~/css/table/style.css" />
 
 <div style="width:60%">
 
