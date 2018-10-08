@@ -1,8 +1,9 @@
-td .right-row {
-  float: left;
-  display: inline;
-  margin: 0px 4px;
+.right-row {
+    float: left;
+    display: inline;
+    margin: 0px 4px;
 }
-td .right-row label {
-  margin-right: 15px !important;
+
+.right-row label {
+    width: 50px
 }

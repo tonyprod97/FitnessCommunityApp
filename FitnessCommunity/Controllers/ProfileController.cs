@@ -45,6 +45,7 @@ namespace FitnessCommunity.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(ProfileViewModel profileViewModel)
         {
             if (!ModelState.IsValid) return View("Index",profileViewModel);

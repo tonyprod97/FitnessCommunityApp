@@ -1,9 +1,9 @@
 ﻿@model ProfileViewModel
-@inject FitnessCommunity.Services.ApplicationUserService userService 
+@inject FitnessCommunity.Services.ApplicationUserService userService
 @{
     ViewData["Title"] = "Index";
-    string welcomeMessage = !string.IsNullOrEmpty(Model.FirstName) && !string.IsNullOrEmpty(Model.LastName) ? 
-        "Welcome "+Model.FirstName+" "+Model.LastName : "Welcome "+ User.Identity.Name;
+    string welcomeMessage = !string.IsNullOrEmpty(Model.FirstName) && !string.IsNullOrEmpty(Model.LastName) ?
+        "Welcome " + Model.FirstName + " " + Model.LastName : "Welcome " + User.Identity.Name;
 
 }
 
@@ -49,7 +49,7 @@
                                 <div class="form-group row">
                                     <label asp-for="PhoneNumber" class="col-4 col-form-label"></label>
                                     <div class="col-8">
-                                        <input asp-for="PhoneNumber" class="form-control">
+                                        <input asp-for="PhoneNumber" class="form-control" type="tel">
                                         <span asp-validation-for="PhoneNumber"></span>
                                     </div>
                                 </div>
@@ -77,3 +77,9 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+}

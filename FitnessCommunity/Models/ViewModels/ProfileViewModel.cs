@@ -14,6 +14,7 @@ namespace FitnessCommunity.Models.ViewModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Display(Name = "Phone Number")]
+        [Phone]
         public string PhoneNumber { get; set; }
         [Display(Name = "Public Info")]
         public string PublicInfo { get; set; }

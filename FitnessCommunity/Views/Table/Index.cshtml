@@ -30,7 +30,7 @@
                             @log.LogDate.ToShortDateString()
                         </td>
                         <td class="right-row">
-                            <label> @log.WeightValue</label>
+                            <label> @Decimal.Round((Decimal)log.WeightValue,2)</label>
                             <a asp-area="" asp-controller="WeightLog" asp-action="Delete" asp-route-id="@log.Id" class="btn btn-info btn-xs">Delete</a>
                             <a asp-area="" asp-controller="WeightLog" asp-action="Edit" asp-route-id="@log.Id" class="btn btn-primary btn-xs">Edit</a>
                         </td>
@@ -44,8 +44,41 @@
 @section Scripts
     {
     <script>
+        $.fn.dataTableExt.oSort["date-format-desc"] = function (x, y) {
+            x = new Date(x);
+            y = new Date(y);
+
+            return x > y ? -1 : 1;
+        };
+
+        $.fn.dataTableExt.oSort["date-format-asc"] = function (x, y) {
+            x = new Date(x);
+            y = new Date(y);
+
+            return x > y ? 1 : -1;
+        }
+        $.fn.dataTableExt.oSort["weight-desc"] = function (x, y) {
+            x = parseFloat($($($(x)).filter('label')).text());
+            y = parseFloat($($($(y)).filter('label')).text());
+
+            return x > y ? -1 : 1;
+        };
+
+        $.fn.dataTableExt.oSort["weight-asc"] = function (x, y) {
+            x = parseFloat($($($(x)).filter('label')).text());
+            y = parseFloat($($($(y)).filter('label')).text());
+
+            return x > y ? 1 : -1;
+        }
+
+        
         $(document).ready(function () {
-            var table = $('#weightLogsTable').DataTable();
+            $('#weightLogsTable').DataTable({
+                columnDefs: [
+                    { type: 'date-format', targets: 0 },
+                    { type: 'weight', targets: 1 }
+                ]
+            } );
         });
     </script>
 }

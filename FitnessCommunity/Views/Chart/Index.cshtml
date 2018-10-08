@@ -40,9 +40,6 @@
         }
 
         $(document).ready(function () {
-
-
-
             var options = {
                 title: {
                     text: "@ViewBag.Title"
@@ -50,7 +47,7 @@
                 animationEnabled: true,
                 exportEnabled: true,
                 axisY: {
-                    title: "Weight (in kg)",
+                    title: "Weight in @ViewBag.MeasureType",
                     includeZero: false
                 },
                 axisX: {

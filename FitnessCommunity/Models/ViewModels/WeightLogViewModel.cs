@@ -13,7 +13,7 @@ namespace FitnessCommunity.Models.ViewModels
 
         [Required]
         [Range(0.0, 1000.0)]
-        [Display(Name ="Weight in kg")]
+        [Display(Name ="Weight")]
         public Nullable<float> WeightValue { get; set; }
 
     }

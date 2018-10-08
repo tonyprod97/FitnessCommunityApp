@@ -29,15 +29,21 @@ namespace FitnessCommunity.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetAllWeightLogs(await _applicationUserService.GetUserByName(this.User.Identity.Name));
+            
+            ViewBag.Title = "Data since starting weight";
+            ApplicationUser user = await _applicationUserService.GetUserByName(User.Identity.Name);
+            ViewBag.MeasureType = user.MeasureType;
+
+            if (user.MeasureType == Enums.MeasureType.lbs)
+                weightLogs = weightLogs.Select(log => WeightConverter.ConvertToLbs(log));
             IList<WeightLogViewModel> chartData = _mapper.Map<IEnumerable<WeightLogViewModel>>(weightLogs).ToList();
             ViewBag.WeightLogs = chartData.OrderBy(log => log.LogDate);
-            ViewBag.Title = "Data since starting weight";
-
             return View();
         }
 
      
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DisplayWeightLogsSinceDate(ChartViewModel chartViewModel)
         {
             IEnumerable<WeightLog> weightLogs = await _weigtLogService.GetWeightLogsSinceDate(await _applicationUserService.GetUserByName(this.User.Identity.Name),chartViewModel);
